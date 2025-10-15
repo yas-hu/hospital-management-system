@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="{{ url_for('index') }}" class="nav-logo">Hospital Management</a>
+                <div class="nav-links">
+                    <a href="{{ url_for('index') }}" class="nav-item">Home</a>
+                </div>
+            </div>
+            <a href="{{ url_for('dashboard') }}"><button class="account-btn">Account</button></a>
+        </nav>
+    </header>
+
+    <div class="inventory">
+        <h1>Inventory Items</h1>
+    </div>
+
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody id="inventory-data">
+            <!-- Inventory Data Fetched From XML -->
+        </tbody>
+    </table>
+
+    <br><br><br><br><br><br><br>
+
+    <footer>
+        <p>&copy; 2024 Hospital Management. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch the inventory.xml file from the Flask server
+            fetch("{{ url_for('static', filename='inventory_data.xml') }}")
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data, "application/xml");
+                    const items = xml.getElementsByTagName("item");
+
+                    // Get table body
+                    const tableBody = document.getElementById("inventory-data");
+
+                    // Loop through XML data and display it
+                    Array.from(items).forEach(item => {
+                        const row = document.createElement("tr");
+
+                        const id = item.getElementsByTagName("id")[0].textContent;
+                        const name = item.getElementsByTagName("name")[0].textContent;
+                        const quantity = item.getElementsByTagName("quantity")[0].textContent;
+                        const description = item.getElementsByTagName("description")[0].textContent;
+
+                        row.innerHTML = `
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${quantity}</td>
+                            <td>${description}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching XML data:", error));
+        });
+    </script>
+
+</body>
+</html>

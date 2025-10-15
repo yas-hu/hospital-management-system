@@ -1,0 +1,52 @@
+{% extends 'app.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="#" class="nav-logo">Hospital Management</a>
+                <div class="nav-links">
+                    <a href="{{ url_for('index') }}" class="nav-item">Home</a>
+                </div>
+            </div>
+            <a href="{{ url_for('dashboard') }}"><button class="account-btn">Account</button></a>
+
+        </nav>
+    </header>
+
+    <main>
+        <div class="account-container">
+            <div class="account-box">
+                <h2>Account Details</h2>
+
+                {% if user %}
+                    <div class="user-info">
+                        <p><strong>Name:</strong> {{ user[1] }}</p>
+                        <p><strong>Email:</strong> {{ user[2] }}</p>
+                    </div>
+                    <a href="{{ url_for('logout') }}" class="btn btn-dark">Logout</a>
+                {% else %}
+                    <p>No user information available. Please <a href="{{ url_for('login') }}" class="login-link">log in</a>.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hospital Management. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+
+{% endblock %}

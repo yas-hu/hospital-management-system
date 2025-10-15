@@ -1,0 +1,58 @@
+<!-- inventory_data.xml -->
+<inventory>
+    <item>
+        <id>1</id>
+        <name>Blood Pressure Monitor</name>
+        <quantity>5</quantity>
+        <description>Used for measuring blood pressure</description>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Stethoscope</name>
+        <quantity>10</quantity>
+        <description>Used for auscultation</description>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Syringe</name>
+        <quantity>500</quantity>
+        <description>Used for injections and sample collection</description>
+    </item>
+    <item>
+        <id>4</id>
+        <name>Thermometer</name>
+        <quantity>20</quantity>
+        <description>Used for measuring body temperature</description>
+    </item>
+    <item>
+        <id>5</id>
+        <name>X-ray Machine</name>
+        <quantity>2</quantity>
+        <description>Used for diagnostic imaging</description>
+    </item>
+    <item>
+        <id>6</id>
+        <name>IV Drip Stand</name>
+        <quantity>15</quantity>
+        <description>Stand for intravenous drips</description>
+    </item>
+    <item>
+        <id>7</id>
+        <name>Defibrillator</name>
+        <quantity>3</quantity>
+        <description>Used for restoring normal heartbeat</description>
+    </item>
+    <item>
+        <id>8</id>
+        <name>Oxygen Cylinder</name>
+        <quantity>25</quantity>
+        <description>Used for supplying oxygen to patients</description>
+    </item>
+    <item>
+        <id>9</id>
+        <name>ECG Machine</name>
+        <quantity>4</quantity>
+        <description>Used for electrocardiogram tests</description>
+    </item>
+  
+</inventory>

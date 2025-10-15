@@ -1,0 +1,118 @@
+{% extends 'app.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="#" class="nav-logo">Hospital Management</a>
+                <div class="nav-links">
+                    <a href="{{ url_for('index') }}" class="nav-item">Home</a>
+                </div>
+            </div>
+            <a href="{{ url_for('dashboard') }}"><button class="account-btn">Account</button></a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="alert-container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <section class="form-section">
+                <h1>Book an Appointment</h1>
+                <form action="/appointment" method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        {{ form.name.label(for="name") }}
+                        {{ form.name(id="name", class="form-control") }}
+                        {% if form.name.errors %}
+                            <ul class="text-danger">
+                                {% for error in form.name.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email.label(for="email") }}
+                        {{ form.email(id="email", class="form-control") }}
+                        {% if form.email.errors %}
+                            <ul class="text-danger">
+                                {% for error in form.email.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.date.label(for="date") }}
+                        {{ form.date(id="date", class="form-control", type="date") }}
+                        {% if form.date.errors %}
+                            <ul class="text-danger">
+                                {% for error in form.date.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.time.label(for="time") }}
+                        {{ form.time(id="time", class="form-control", type="time", min="09:00", max="17:00") }}
+                        <small class="form-text text-muted">Available between 09:00 and 17:00</small>
+                        {% if form.time.errors %}
+                            <ul class="text-danger">
+                                {% for error in form.time.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.reason.label(for="reason") }}
+                        {{ form.reason(id="reason", class="form-control") }}
+                        {% if form.reason.errors %}
+                            <ul class="text-danger">
+                                {% for error in form.reason.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    {{ form.submit(class="btn btn-dark mt-4") }}
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hospital Management. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('patientrecord') }}">Patient Records</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Details for {{ patient.name }}</h1>
+        <p><strong>Age:</strong> {{ patient.age }}</p>
+        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+        <p><strong>Contact:</strong> {{ patient.contact }}</p>
+        <p><strong>Diagnosis:</strong> {{ patient.diagnosis }}</p>
+
+        <h2>Treatments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Treatment</th>
+                    <th>Medication</th>
+                    <th>Cost</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treatment in treatments %}
+                <tr>
+                    <td>{{ treatment[1] }}</td>
+                    <td>{{ treatment[2] }}</td>
+                    <td>${{ treatment[3] }}</td>
+                    <td>{{ treatment[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Total Bill: ${{ total_cost }}</h3>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hospital Management. All rights reserved.</p>
+    </footer>
+</body>
+</html>
